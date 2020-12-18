@@ -9,6 +9,8 @@ SS_PASSWORD=540050860
 SS_PORT=8388
 SS_METHOD=aes-256-cfb
 SS_IP=`$1`
+echo $1
+echo "SS_IP:      ${SS_IP}"
 GET_PIP_FILE=/tmp/get-pip.py
 
 # install pip
