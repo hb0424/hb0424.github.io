@@ -8,7 +8,7 @@ SERVICE_FILE=/etc/systemd/system/shadowsocks.service
 SS_PASSWORD=540050860
 SS_PORT=8388
 SS_METHOD=aes-256-cfb
-SS_IP=`ip route get 1 | awk '{print $NF;exit}'`
+SS_IP=`$1`
 GET_PIP_FILE=/tmp/get-pip.py
 
 # install pip
@@ -22,7 +22,7 @@ pip install shadowsocks
 # create shadowsocls config
 cat <<EOF | sudo tee ${CONFIG_FILE}
 {
-  "server": "0.0.0.0",
+  "server": "$1",
   "server_port": ${SS_PORT},
   "password": "${SS_PASSWORD}",
   "method": "${SS_METHOD}"
