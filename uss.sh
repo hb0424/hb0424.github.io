@@ -18,5 +18,4 @@ cat <<EOF | sudo tee ${CONFIG_FILE}
 }
 EOF
 
-ssserver -c /etc/shadowsocks.json
 ssserver -c /etc/shadowsocks.json -d start
