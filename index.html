@@ -163,7 +163,7 @@
 		}
 
 		function onAClicked(curID) {
-			//
+			setCookie('lastSearchID', curID);
 			if (curID == "aBaidu") {
 				if ($('#inputSearch').val().length > 0)
 					window.open('http://www.baidu.com/s?cl=3&wd=' + $('#inputSearch').val());
