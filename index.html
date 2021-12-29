@@ -1,11 +1,249 @@
+<!-- saved from url=(0024)http://www.yundamen.com/ -->
 <html>
-    <head>
-        <title>Houbin Blog</title>
-    </head>
-    <body>
-        <h1>
-            Hello Github pages!
-        </h1>
-        <a href="/installss.sh">InstallSS.sh</a>
-    </body>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript">
+		var _allNavs;
+	</script>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<!-- Site Properties -->
+	<title>云大门</title>
+	<link rel="stylesheet" type="text/css" href="./3rd/bootstrap.min.css">
+	<script src="./3rd/jquery-2.1.0.js"></script>
+	<script src="./3rd/bootstrap.min.js"></script>
+	<script src="./3rd/cookie.js"></script>
+</head>
+<body>
+	<nav style="border-radius: 0px;" class="navbar navbar-inverse ">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand">云大门</a>
+			</div>
+			<div class="hidden-xs">
+				<p class="navbar-text navbar-right">做一个自由的云导航</p>
+			</div>
+		</div>
+	</nav>
+	<div id="main" class="container">
+		<div class="row">
+			<form id="formSearch">
+				<div class="col-lg-6 col-md-5 col-sm-8 col-xs-8">
+					<input id="inputSearch" type="text" class="form-control" placeholder="搜索内容">
+				</div>
+				<div class="btn-group col-lg-2 col-md-4 col-sm-4 col-xs-4">
+					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+						<span id="btnSearch" onclick="onLastSearch()">必应</span>
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a onclick="onAClicked(&#39;aBaidu&#39;)" id="aBaidu">百度</a></li>
+						<li><a onclick="onAClicked(&#39;aBing&#39;)" id="aBing">必应</a></li>
+						<li><a onclick="onAClicked(&#39;aZhihu&#39;)" id="aZhihu">知乎</a></li>
+						<li><a onclick="onAClicked(&#39;aBilibili&#39;)" id="aBilibili">Bilibili</a></li>
+						<li><a onclick="onAClicked(&#39;aQidian&#39;)" id="aQidian">起点</a></li>
+						<li><a onclick="onAClicked(&#39;aGoogle&#39;)" id="aGoogle">谷歌</a></li>
+					</ul>
+				</div>
+			</form>
+		</div>
+		<br>
+		<div class="row">
+			<div id="rowNavs">
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var curModNavID;
+		var urls = {
+			"data":[
+				{
+					"type":"实用工具",
+					"data":[
+						{"title":"百度翻译", "address":"https://fanyi.baidu.com/#en/zh/"},
+						{"title":"wikiHow", "address":"https://www.wikihow.com/Main-Page"},
+						{"title":"日历", "address":"https://www.baidu.com/s?wd=%E6%97%A5%E5%8E%86"},
+						{"title":"JustMySocks", "address":"https://justmysocks.net/"},
+						{"title":"Cloudflare", "address":"https://dash.cloudflare.com/login"},
+						{"title":"端口在线检测", "address":"https://coding.tools/cn/port-checker"},
+						{"title":"火车正晚点", "address":"https://kyfw.12306.cn/otn/zwdch/init"},
+						{"title":"DLL 下载", "address":"https://cn.dll-files.com/"},
+						{"title":"12306", "address":"https://kyfw.12306.cn/otn/leftTicket/init"},
+						{"title":"携程", "address":"https://www.ctrip.com/"},
+						{"title":"微云", "address":"https://www.weiyun.com/disk"},
+						{"title":"猎聘", "address":"https://www.liepin.com/"},
+						{"title":"上海市人力资源和社会保障局", "address":"https://rsj.sh.gov.cn/"},
+						{"title":"Office365-Online", "address":"https://www.microsoft.com/zh-cn/microsoft-365/free-office-online-for-the-web"},
+						{"title":"天气", "address":"https://www.baidu.com/s?cl=3&wd=%E5%A4%A9%E6%B0%94"},
+						{"title":"阿里云文档", "address":"https://help.aliyun.com/document_detail/29774.html?spm=5176.doc29754.6.176.UXDgEk"},
+						{"title":"时间戳转换", "address":"http://tool.chinaz.com/Tools/unixtime.aspx"},
+						{"title":"单位转换", "address":"http://www.zhuanhuanqi.com/danwei/danwei.html"},
+						{"title":"在线BASE64", "address":"http://tool.chinaz.com/Tools/Base64.aspx"},
+						{"title":"百度网盘", "address":"https://pan.baidu.com/"},
+						{"title":"QQ网盘", "address":"https://www.weiyun.com/"},
+						{"title":"付费通", "address":"https://www.shfft.com/"},
+						{"title":"MSDN I tell you", "address":"https://msdn.itellyou.cn/"},
+						{"title":"聚BT", "address":"https://jubt.live/cn/index.html"},
+					]
+				},
+				{
+					"type":"学习",
+					"data":[
+						{"title":"QT Doc", "address":"https://doc.qt.io/qt-5/stylesheet-reference.html#list-of-properties"},
+						{"title":"Stack Overflow", "address":"https://stackoverflow.com/"},
+						{"title":"可汗EN", "address":"https://www.khanacademy.org/"},
+						{"title":"可汗CN", "address":"https://zh.khanacademy.org/"},
+						{"title":"English Grammar", "address":"https://www.myenglishpages.com/english/grammar.php"},
+						{"title":"正则表达式", "address":"https://deerchao.cn/tutorials/regex/regex.htm"},
+						{"title":"微软虚拟学院", "address":"https://docs.microsoft.com/zh-cn/learn/browse/"},
+						{"title":"AngularJS", "address":"http://www.imooc.com/learn/156"},
+						{"title":"GitHub", "address":"https://github.com/"},
+						{"title":"W3School-JS", "address":"https://www.w3school.com.cn/js/index.asp"},
+						{"title":"W3School-PHP", "address":"https://www.w3school.com.cn/php/index.asp"},
+						{"title":"W3School-SQL", "address":"https://www.w3school.com.cn/sql/index.asp"},
+						{"title":"菜鸟教程", "address":"https://www.runoob.com/"},
+						{"title":"菜鸟教程-Python3", "address":"https://www.runoob.com/python3/python3-tutorial.html"},
+						{"title":"网易公开课-可汗", "address":"https://open.163.com/khan/#science"},
+						{"title":"网易云课堂", "address":"https://study.163.com/curricula/cs.htm"},
+						{"title":"腾讯课堂", "address":"https://ke.qq.com/"},
+						{"title":"廖雪峰-Git", "address":"https://www.liaoxuefeng.com/wiki/896043488029600"},
+						{"title":"廖雪峰-教程", "address":"https://www.liaoxuefeng.com/"},
+						{"title":"开源中国", "address":"https://www.oschina.net/"},
+						{"title":"Keras", "address":"https://keras.io/"},
+						{"title":"驾照考试", "address":"https://www.jiazhao.com/xc/"},
+						{"title":"CentOS8-install-Oracle19c", "address":"https://blog.csdn.net/jeremytsai/article/details/106109001"},
+						{"title":"Linux-C", "address":"http://akaedu.github.io/book/"},
+						{"title":"Nginx", "address":"http://tengine.taobao.org/book/index.html"},
+						{"title":"Linux-Basic", "address":"https://www.linuxprobe.com/chapter-02.html"},
+					]
+				},
+				{
+					"type":"政府机构",
+					"data":[
+						{"title":"上海市人力资源和社会保障局", "address":"https://rsj.sh.gov.cn/"},
+						{"title":"社保个人办事平台", "address":"http://www.rsj.sh.gov.cn/sbsjb/wzb/226.jsp"},
+						{"title":"上海社保公共服务平台", "address":"http://ggfw.rsj.sh.gov.cn/"},
+						{"title":"上海市医疗保障局", "address":"http://ybj.sh.gov.cn/"},
+						{"title":"工业和信息化部政务服务平台-域名信息备案管理系统", "address":"https://beian.miit.gov.cn/#/Integrated/index"},
+						{"title":"工业和信息化部政务服务平台-网上服务大厅", "address":"https://tsm.miit.gov.cn/dxxzsp/"},
+						{"title":"上海人才网", "address":"http://222.68.19.232/webMaster/ggrs/ggrs_dawtgl.htm"},
+						{"title":"博益网", "address":"http://www.boee.cn/"},
+						{"title":"上海市教育考试院", "address":"http://www.shmeea.edu.cn/page/index.html"},
+						{"title":"上海市高等教育自学考试报名", "address":"http://zkbm.shmeea.edu.cn/"},
+						{"title":"山西省通信管理局", "address":"https://sxca.miit.gov.cn/"},
+						{"title":"茂名政务服务网-我的申办", "address":"https://zwfw.maoming.gov.cn/gaio/#/"},
+						
+						
+					]
+				},
+			]
+		}
+	</script>
+
+
+	<script type="text/javascript">
+		$('#formSearch').submit(function (e) {
+			e.preventDefault();
+			window.event.returnValue = false;
+			onLastSearch();
+			return false;
+		})
+	</script>
+	
+	<script type="text/javascript">
+		
+		var lastSearchID = getCookie('lastSearchID');
+		if(lastSearchID.length <= 0)
+			lastSearchID = "aBing";
+
+		function onLastSearch() {
+			onAClicked(lastSearchID);
+		}
+
+		function onAClicked(curID) {
+			//
+			if (curID == "aBaidu") {
+				if ($('#inputSearch').val().length > 0)
+					window.open('http://www.baidu.com/s?cl=3&wd=' + $('#inputSearch').val());
+				$('#btnSearch').html('百度');
+				lastSearchID = "aBaidu";
+			}
+			else if (curID == "aGoogle") {
+				if ($('#inputSearch').val().length > 0)
+					window.open('http://www.google.com/search?q=' + $('#inputSearch').val());
+				$('#btnSearch').html('谷歌');
+				lastSearchID = "aGoogle";
+			}
+			else if (curID == "aZhihu") {
+				if ($('#inputSearch').val().length > 0)
+					window.open('http://www.zhihu.com/search?type=content&q=' + $('#inputSearch').val());
+				$('#btnSearch').html('知乎');
+				lastSearchID = "aZhihu";
+			}
+			else if (curID == "aBing") {
+				if ($('#inputSearch').val().length > 0)
+					window.open('http://cn.bing.com/search?q=' + $('#inputSearch').val());
+				$('#btnSearch').html('必应');
+				lastSearchID = "aBing";
+			}
+			else if (curID == "aQidian") {
+				if ($('#inputSearch').val().length > 0)
+					window.open('http://www.qidian.com/search?kw=' + $('#inputSearch').val());
+				$('#btnSearch').html('起点');
+				lastSearchID = "aQidian";
+			}
+			else if (curID == "aBilibili") {
+				if ($('#inputSearch').val().length > 0)
+					window.open('http://search.bilibili.com/all?keyword=' + $('#inputSearch').val());
+				$('#btnSearch').html('Bilibili');
+				lastSearchID = "aBilibili";
+			}
+		}
+
+		function openUrl(url) {
+			window.open(url);
+		}
+	</script>
+
+	<script type="text/javascript">
+		function initAllNavs() {
+			//jsonData = $.parseJSON(data);
+			
+			$("#rowNavs").empty();
+			var navPanelTemplate = "<div style=\"margin:0px;border:none;\" class=\"panel panel-default\">\
+								<h4 style=\"margin:0px;padding:0px;\"><span class=\"label label-primary\">#title#</span>\
+								</h4><div id=\"#ID#\" class=\"panel-body\">\
+									\
+								</div>\
+							</div>";
+			_allNavs = urls.data;
+			var bAdd = false;
+			for (i in _allNavs) {
+				navGroup = _allNavs[i];
+				navTitle = navGroup.type;
+				navPanel = navPanelTemplate;
+				navPanel = navPanel.replace(/#title#/, navTitle);
+				navPanel = navPanel.replace(/#ID#/, "panel" + i);
+				$("#rowNavs").append(navPanel);
+				for (j in navGroup.data) {
+					bAdd = true;
+					nav = navGroup.data[j];
+					btn = "<button onclick=openUrl('#address#') type=\"button\" class=\"btn btn-default\" style=\"margin:5px;\">#title#</button>";
+					btn = btn.replace(/#address#/, nav.address);
+					btn = btn.replace(/#title#/, nav.title);
+					$('#' + "panel" + i).append(btn);
+				}
+			}	
+		}
+		initAllNavs();
+		var userName = getCookie('name');
+		userName = "xxx"
+		//alert(userName);
+		$('#userName').html(userName);
+	</script>
+	
+</body>
+
 </html>
