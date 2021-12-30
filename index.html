@@ -33,20 +33,23 @@
 					<input id="inputSearch" type="text" class="form-control" placeholder="搜索内容">
 				</div>
 				<div class="btn-group col-lg-2 col-md-4 col-sm-4 col-xs-4">
-					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+					<button type="button" class="btn btn-primary" >
 						<span id="btnSearch" onclick="onLastSearch()">必应</span>
-						<span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li><a onclick="onAClicked(&#39;aBaidu&#39;)" id="aBaidu">百度</a></li>
-						<li><a onclick="onAClicked(&#39;aBing&#39;)" id="aBing">必应</a></li>
-						<li><a onclick="onAClicked(&#39;aZhihu&#39;)" id="aZhihu">知乎</a></li>
-						<li><a onclick="onAClicked(&#39;aBilibili&#39;)" id="aBilibili">Bilibili</a></li>
-						<li><a onclick="onAClicked(&#39;aQidian&#39;)" id="aQidian">起点</a></li>
-						<li><a onclick="onAClicked(&#39;aGoogle&#39;)" id="aGoogle">谷歌</a></li>
-					</ul>
+					
 				</div>
 			</form>
+		</div>
+		<div class="row">
+				<div class="btn-group col-lg-6 col-md-6 col-sm-4 col-xs-4">
+					<button onclick="onAClicked(&#39;aBaidu&#39;)" class="btn  btn-sm">百度</button>
+					<button onclick="onAClicked(&#39;aBing&#39;)" class="btn  btn-sm">必应</button>
+					<button onclick="onAClicked(&#39;aZhihu&#39;)" class="btn  btn-sm">知乎</button>
+					<button onclick="onAClicked(&#39;aBilibili&#39;)" class="btn  btn-sm">Bilibili</button>
+					<button onclick="onAClicked(&#39;aQidian&#39;)" class="btn  btn-sm">起点</button>
+					<button onclick="onAClicked(&#39;aGoogle&#39;)" class="btn  btn-sm">谷歌</button>
+					<button onclick="onAClicked(&#39;aGitHub&#39;)" class="btn  btn-sm">GitHub</button>
+				</div>
 		</div>
 		<br>
 		<div class="row">
@@ -62,26 +65,26 @@
 				{
 					"type":"娱乐",
 					"data":[
-						{"title":"起点", "address":"https://www.qidian.com/"},
-						{"title":"知乎", "address":"https://www.zhihu.com/"},
-						{"title":"Quora", "address":"https://www.quora.com/"},
-						{"title":"CCTV", "address":"https://www.cctv.com/"},
-						{"title":"古典音乐", "address":"https://www.ncpa-classic.com/index.shtml"},
-						{"title":"豆瓣", "address":"https://www.douban.com/"},
-						{"title":"Bilibili", "address":"https://www.bilibili.com/"},
-						{"title":"漫威", "address":"https://getcomics.info/marvel/ultimate-marvel-universe-collection-2000-2015/"},
+						{"title":"起点",		"address":"https://www.qidian.com/"},
+						{"title":"知乎",		"address":"https://www.zhihu.com/"},
+						{"title":"Quora",		"address":"https://www.quora.com/"},
+						{"title":"CCTV",		"address":"https://www.cctv.com/"},
+						{"title":"古典音乐",	"address":"https://www.ncpa-classic.com/index.shtml"},
+						{"title":"豆瓣", 		"address":"https://www.douban.com/"},
+						{"title":"Bilibili", 	"address":"https://www.bilibili.com/"},
+						{"title":"漫威", 		"address":"https://getcomics.info/marvel/ultimate-marvel-universe-collection-2000-2015/"},
 					]
 				},
 				{
 					"type":"实用工具",
 					"data":[
-						{"title":"百度翻译", "address":"https://fanyi.baidu.com/#en/zh/"},
-						{"title":"wikiHow", "address":"https://www.wikihow.com/Main-Page"},
-						{"title":"日历", "address":"https://www.baidu.com/s?wd=%E6%97%A5%E5%8E%86"},
+						{"title":"百度翻译", 	"address":"https://fanyi.baidu.com/#en/zh/"},
+						{"title":"wikiHow", 	"address":"https://www.wikihow.com/Main-Page"},
+						{"title":"日历", 		"address":"https://www.baidu.com/s?wd=%E6%97%A5%E5%8E%86"},
 						{"title":"JustMySocks", "address":"https://justmysocks.net/"},
-						{"title":"Cloudflare", "address":"https://dash.cloudflare.com/login"},
+						{"title":"Cloudflare", 	"address":"https://dash.cloudflare.com/login"},
 						{"title":"端口在线检测", "address":"https://coding.tools/cn/port-checker"},
-						{"title":"火车正晚点", "address":"https://kyfw.12306.cn/otn/zwdch/init"},
+						{"title":"火车正晚点", 	"address":"https://kyfw.12306.cn/otn/zwdch/init"},
 						{"title":"DLL 下载", "address":"https://cn.dll-files.com/"},
 						{"title":"12306", "address":"https://kyfw.12306.cn/otn/leftTicket/init"},
 						{"title":"携程", "address":"https://www.ctrip.com/"},
@@ -167,10 +170,7 @@
 	
 	<script type="text/javascript">
 		
-		var lastSearchID = getCookie('lastSearchID');
-		if(lastSearchID.length <= 0)
-			lastSearchID = "aBing";
-
+		
 		function onLastSearch() {
 			onAClicked(lastSearchID);
 		}
@@ -213,6 +213,13 @@
 				$('#btnSearch').html('Bilibili');
 				lastSearchID = "aBilibili";
 			}
+			else if (curID == "aGitHub") {
+				if ($('#inputSearch').val().length > 0)
+					window.open('http://github.com/search?q=' + $('#inputSearch').val());
+				$('#btnSearch').html('GitHub');
+				lastSearchID = "aGitHub";
+			}
+			
 		}
 
 		function openUrl(url) {
@@ -222,7 +229,10 @@
 
 	<script type="text/javascript">
 		function initAllNavs() {
-			//jsonData = $.parseJSON(data);
+			var lastSearchID = getCookie('lastSearchID');
+			if(lastSearchID.length <= 0)
+			lastSearchID = "aBing";
+
 			
 			$("#rowNavs").empty();
 			var navPanelTemplate = "<div style=\"margin:0px;border:none;\" class=\"panel panel-default\">\
@@ -251,10 +261,6 @@
 			}	
 		}
 		initAllNavs();
-		var userName = getCookie('name');
-		userName = "xxx"
-		//alert(userName);
-		$('#userName').html(userName);
 	</script>
 	
 </body>
