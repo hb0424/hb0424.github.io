@@ -41,7 +41,7 @@
 			</form>
 		</div>
 		<div class="row">
-				<div class="btn-group col-lg-6 col-md-6 col-sm-4 col-xs-4">
+				<div class="btn-group col-lg-6 col-md-5 col-sm-8 col-xs-8">
 					<button onclick="onAClicked(&#39;aBaidu&#39;)" class="btn  btn-sm">百度</button>
 					<button onclick="onAClicked(&#39;aBing&#39;)" class="btn  btn-sm">必应</button>
 					<button onclick="onAClicked(&#39;aZhihu&#39;)" class="btn  btn-sm">知乎</button>
@@ -158,18 +158,14 @@
 		}
 	</script>
 
-
 	<script type="text/javascript">
+		var lastSearchID = "aBing";
 		$('#formSearch').submit(function (e) {
 			e.preventDefault();
 			window.event.returnValue = false;
 			onLastSearch();
 			return false;
 		})
-	</script>
-	
-	<script type="text/javascript">
-		
 		
 		function onLastSearch() {
 			onAClicked(lastSearchID);
@@ -225,15 +221,12 @@
 		function openUrl(url) {
 			window.open(url);
 		}
-	</script>
 
-	<script type="text/javascript">
 		function initAllNavs() {
-			var lastSearchID = getCookie('lastSearchID');
+			lastSearchID = getCookie('lastSearchID');
 			if(lastSearchID.length <= 0)
-			lastSearchID = "aBing";
+				lastSearchID = "aBing";
 
-			
 			$("#rowNavs").empty();
 			var navPanelTemplate = "<div style=\"margin:0px;border:none;\" class=\"panel panel-default\">\
 								<h4 style=\"margin:0px;padding:0px;\"><span class=\"label label-primary\">#title#</span>\
@@ -262,7 +255,6 @@
 		}
 		initAllNavs();
 	</script>
-	
 </body>
 
 </html>
