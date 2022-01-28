@@ -50,6 +50,8 @@
 					<button onclick="onAClicked(&#39;aQidian&#39;)" class="btn  btn-sm">起点</button>
 					<button onclick="onAClicked(&#39;aGoogle&#39;)" class="btn  btn-sm">谷歌</button>
 					<button onclick="onAClicked(&#39;aGitHub&#39;)" class="btn  btn-sm">GitHub</button>
+					<button onclick="onAClicked(&#39;aJD&#39;)" class="btn  btn-sm">京东</button>
+					<button onclick="onAClicked(&#39;aTaoBao&#39;)" class="btn  btn-sm">淘宝</button>
 				</div>
 		</div>
 		<br>
@@ -225,7 +227,18 @@
 				$('#btnSearch').html('GitHub');
 				lastSearchID = "aGitHub";
 			}
-			
+			else if (curID == "aJD") {
+				if ($('#inputSearch').val().length > 0)
+					window.open('https://search.jd.com/Search?keyword=' + $('#inputSearch').val());
+				$('#btnSearch').html('京东');
+				lastSearchID = "aJD";
+			}
+			else if (curID == "aTaoBao") {
+				if ($('#inputSearch').val().length > 0)
+					window.open('https://s.taobao.com/search?q=xx' + $('#inputSearch').val());
+				$('#btnSearch').html('淘宝');
+				lastSearchID = "aTaoBao";
+			}
 		}
 
 		function openUrl(url) {
