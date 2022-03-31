@@ -187,55 +187,55 @@
 		function onAClicked(curID) {
 			setCookie('lastSearchID', curID);
 			if (curID == "aBaidu") {
-				if ($('#inputSearch').val().length > 0)
+				//if ($('#inputSearch').val().length > 0)
 					window.open('http://www.baidu.com/s?cl=3&wd=' + $('#inputSearch').val());
 				$('#btnSearch').html('百度');
 				lastSearchID = "aBaidu";
 			}
 			else if (curID == "aGoogle") {
-				if ($('#inputSearch').val().length > 0)
+				//if ($('#inputSearch').val().length > 0)
 					window.open('http://www.google.com/search?q=' + $('#inputSearch').val());
 				$('#btnSearch').html('谷歌');
 				lastSearchID = "aGoogle";
 			}
 			else if (curID == "aZhihu") {
-				if ($('#inputSearch').val().length > 0)
+				//if ($('#inputSearch').val().length > 0)
 					window.open('http://www.zhihu.com/search?type=content&q=' + $('#inputSearch').val());
 				$('#btnSearch').html('知乎');
 				lastSearchID = "aZhihu";
 			}
 			else if (curID == "aBing") {
-				if ($('#inputSearch').val().length > 0)
+				//if ($('#inputSearch').val().length > 0)
 					window.open('http://cn.bing.com/search?q=' + $('#inputSearch').val());
 				$('#btnSearch').html('必应');
 				lastSearchID = "aBing";
 			}
 			else if (curID == "aQidian") {
-				if ($('#inputSearch').val().length > 0)
+				//if ($('#inputSearch').val().length > 0)
 					window.open('http://www.qidian.com/search?kw=' + $('#inputSearch').val());
 				$('#btnSearch').html('起点');
 				lastSearchID = "aQidian";
 			}
 			else if (curID == "aBilibili") {
-				if ($('#inputSearch').val().length > 0)
+				//if ($('#inputSearch').val().length > 0)
 					window.open('http://search.bilibili.com/all?keyword=' + $('#inputSearch').val());
 				$('#btnSearch').html('Bilibili');
 				lastSearchID = "aBilibili";
 			}
 			else if (curID == "aGitHub") {
-				if ($('#inputSearch').val().length > 0)
+				//if ($('#inputSearch').val().length > 0)
 					window.open('http://github.com/search?q=' + $('#inputSearch').val());
 				$('#btnSearch').html('GitHub');
 				lastSearchID = "aGitHub";
 			}
 			else if (curID == "aJD") {
-				if ($('#inputSearch').val().length > 0)
+				//if ($('#inputSearch').val().length > 0)
 					window.open('https://search.jd.com/Search?keyword=' + $('#inputSearch').val());
 				$('#btnSearch').html('京东');
 				lastSearchID = "aJD";
 			}
 			else if (curID == "aTaoBao") {
-				if ($('#inputSearch').val().length > 0)
+				//if ($('#inputSearch').val().length > 0)
 					window.open('https://s.taobao.com/search?q=' + $('#inputSearch').val());
 				$('#btnSearch').html('淘宝');
 				lastSearchID = "aTaoBao";
