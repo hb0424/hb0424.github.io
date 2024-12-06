@@ -95,9 +95,8 @@
             color: #004d40; /* 倒计时显示颜色 */
             /*font-size: 2em;  放大倒计时显示 */
         }
-    </style>
-	<style>
-        #audio-player {
+		
+		#audio-player {
             display: none;
         }
     </style>
@@ -153,11 +152,8 @@
 
             // 获取当前日期
             const now = new Date();
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            document.getElementById('current-time').innerText = `${hours}:${minutes}`;
-			
-            
+			setInterval(document.getElementById('date').innerText = `${now.toLocaleDateString()}`, 600000); // 每10分钟更新一次
+
 			let mark = ':';
             // 实时更新当前时间
             setInterval(() => {
