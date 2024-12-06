@@ -93,6 +93,11 @@
             font-size: 2em; /* 放大倒计时显示 */
         }
     </style>
+	<style>
+        #audio-player {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -114,13 +119,17 @@
                 <button onclick="addTime(30)">增加30分钟</button>
                 <div id="countdown-display">倒计时未开始</div>
                 <button onclick="clearCountdown()">清除倒计时</button>
+				<audio id="audio-player" controls>
+					<source src="30.mp3" type="audio/mpeg">
+				</audio>
             </div>
         </div>
     </div>
+	
     <script>
         let countdownTime = 0;
         let countdownInterval;
-
+		const audioPlayer = document.getElementById('audio-player');
         document.addEventListener('DOMContentLoaded', function() {
             // 获取天气信息
             function updateWeather() {
@@ -172,21 +181,32 @@
                     countdownInterval = null;
                     document.getElementById('countdown-display').innerText = '倒计时结束';
                     //alert('时间到了！');
-					speakText('时间到了, 时间到了, 时间到了');
+					//speakText('时间到了, 时间到了, 时间到了');
+					audioPlayer.src = '0.mp3';
+					audioPlayer.play();
                 } else {
                     countdownTime--;
                     const hours = Math.floor(countdownTime / 3600);
                     const minutes = Math.floor((countdownTime % 3600) / 60);
                     const seconds = countdownTime % 60;
                     document.getElementById('countdown-display').innerText = `倒计时: ${hours}小时 ${minutes}分钟 ${seconds}秒`;
-					if(countdownTime == 120 || countdownTime == 121)
-						speakText('还有两分钟，还有两分钟，还有两分钟');
-					if(countdownTime == 60 || countdownTime == 61)
-						speakText('还有一分钟，还有一分钟，还有一分钟');
-					if(countdownTime == 30 || countdownTime == 31)
-						speakText('还有30秒，还有30秒，还有30秒');
+					if(countdownTime == 120){
+						audioPlayer.src = '120.mp3';
+						audioPlayer.play();
+						//speakText('还有两分钟，还有两分钟，还有两分钟');
+					}
+					if(countdownTime == 60){
+						audioPlayer.src = '60.mp3';
+						audioPlayer.play();
+						//speakText('还有一分钟，还有一分钟，还有一分钟');
+					}
+					if(countdownTime == 30){
+						audioPlayer.src = '30.mp3';
+						audioPlayer.play();
+						//speakText('还有30秒，还有30秒，还有30秒');
+					}
                 }
-            }, 1000);
+            }, 500);
         }
 
         function clearCountdown() {
