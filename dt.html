@@ -61,7 +61,7 @@
         }
 
         .time-display {
-            font-size: 15vw; /* 根据视口宽度调整字体大小 */
+            font-size: 20vw; /* 根据视口宽度调整字体大小 */
             color: #004d40; /* 时间显示颜色 */
         }
 
@@ -71,16 +71,19 @@
             align-items: center;
             flex: 1;
             justify-content: center;
+			justify-content: space-between;
         }
 
         .countdown button {
             margin: 5px 0;
             background-color: #4db6ac; /* 按钮颜色 */
             border: none;
-            padding: 10px;
+            padding: 5px;
             border-radius: 5px;
             color: #ffffff;
             cursor: pointer;
+			width:150px;
+			height:40px;
         }
 
         .countdown button:hover {
@@ -149,14 +152,22 @@
 
             // 获取当前日期
             const now = new Date();
-            document.getElementById('date').innerText = `日期: ${now.toLocaleDateString()}`;
-
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('current-time').innerText = `${hours}:${minutes}`;
+			
             
-
+			let mark = ':';
             // 实时更新当前时间
             setInterval(() => {
+				if(mark==':')
+					mark = ' ';
+				else
+					mark = ':';
                 const now = new Date();
-                document.getElementById('current-time').innerText = now.toLocaleTimeString();
+				const hours = now.getHours().toString().padStart(2, '0');
+				const minutes = now.getMinutes().toString().padStart(2, '0');
+				document.getElementById('current-time').innerText = `${hours}${mark}${minutes}`;
             }, 1000);
         });
 
