@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气和时间显示</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #e0f7fa; /* 柔和的蓝色背景 */
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            background-color: #b2dfdb; /* 柔和的绿色背景 */
+            border: 1px solid #80cbc4;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+
+        .left {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .right {
+            width: 200px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #80cbc4; /* 更深的绿色背景 */
+            border-left: 1px solid #4db6ac;
+        }
+
+        .left-top, .left-bottom {
+            border-bottom: 1px solid #4db6ac;
+            padding-bottom: 20px;
+			font-size: 2vw;
+        }
+
+        .left-bottom {
+            border-bottom: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .left-top {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .time-display {
+            font-size: 18vw; /* 根据视口宽度调整字体大小 */
+            color: #004d40; /* 时间显示颜色 */
+        }
+
+        .countdown {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .countdown button {
+            margin: 5px 0;
+            background-color: #4db6ac; /* 按钮颜色 */
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .countdown button:hover {
+            background-color: #00796b; /* 按钮悬停颜色 */
+        }
+
+        .countdown #countdown-display {
+            margin: 10px 0;
+            color: #004d40; /* 倒计时显示颜色 */
+            font-size: 2em; /* 放大倒计时显示 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="left-top">
+                <div id="date">日期加载中...</div>
+                <div id="weather">天气信息加载中...</div>
+            </div>
+            <div class="left-bottom">
+                <div id="current-time" class="time-display">当前时间加载中...</div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="countdown">
+                <h2>倒计时闹钟</h2>
+                <button onclick="addTime(1)">增加1分钟</button>
+                <button onclick="addTime(5)">增加5分钟</button>
+                <button onclick="addTime(10)">增加10分钟</button>
+                <button onclick="addTime(30)">增加30分钟</button>
+                <div id="countdown-display">倒计时未开始</div>
+                <button onclick="clearCountdown()">清除倒计时</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let countdownTime = 0;
+        let countdownInterval;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取天气信息
+            function updateWeather() {
+                fetch('https://restapi.amap.com/v3/weather/weatherInfo?city=310115&key=b73b1e509457e4f32fd8faa428dc8bd8')
+                    .then(response => response.json())
+                    .then(data => {
+                        const weather = data.lives[0];
+                        document.getElementById('weather').innerText = `天气: ${weather.weather}, 温度: ${weather.temperature}°C 风力: ${weather.windpower}`;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching weather data:', error);
+                        document.getElementById('weather').innerText = '天气信息加载失败';
+                    });
+            }
+
+            updateWeather();
+            setInterval(updateWeather, 600000); // 每10分钟更新一次
+
+            // 获取当前日期
+            const now = new Date();
+            document.getElementById('date').innerText = `日期: ${now.toLocaleDateString()}`;
+
+            
+
+            // 实时更新当前时间
+            setInterval(() => {
+                const now = new Date();
+                document.getElementById('current-time').innerText = now.toLocaleTimeString();
+            }, 1000);
+        });
+
+        function addTime(minutes) {
+            countdownTime += minutes * 60;
+            if (!countdownInterval) {
+                startCountdown();
+            }
+        }
+		
+		function speakText(text) {
+            const speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'zh-CN'; // 设置语言为中文
+            window.speechSynthesis.speak(speech);
+        }
+
+        function startCountdown() {
+            countdownInterval = setInterval(() => {
+                if (countdownTime <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                    document.getElementById('countdown-display').innerText = '倒计时结束';
+                    //alert('时间到了！');
+					speakText('时间到了, 时间到了, 时间到了');
+                } else {
+                    countdownTime--;
+                    const hours = Math.floor(countdownTime / 3600);
+                    const minutes = Math.floor((countdownTime % 3600) / 60);
+                    const seconds = countdownTime % 60;
+                    document.getElementById('countdown-display').innerText = `倒计时: ${hours}小时 ${minutes}分钟 ${seconds}秒`;
+					if(countdownTime == 120 || countdownTime == 121)
+						speakText('还有两分钟，还有两分钟，还有两分钟');
+					if(countdownTime == 60 || countdownTime == 61)
+						speakText('还有一分钟，还有一分钟，还有一分钟');
+					if(countdownTime == 30 || countdownTime == 31)
+						speakText('还有30秒，还有30秒，还有30秒');
+                }
+            }, 1000);
+        }
+
+        function clearCountdown() {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+            countdownTime = 0;
+            document.getElementById('countdown-display').innerText = '倒计时未开始';
+        }
+    </script>
+</body>
+</html>
