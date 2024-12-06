@@ -61,7 +61,7 @@
         }
 
         .time-display {
-            font-size: 18vw; /* 根据视口宽度调整字体大小 */
+            font-size: 10vw; /* 根据视口宽度调整字体大小 */
             color: #004d40; /* 时间显示颜色 */
         }
 
@@ -120,7 +120,7 @@
                 <div id="countdown-display">倒计时未开始</div>
                 <button onclick="clearCountdown()">清除倒计时</button>
 				<audio id="audio-player" controls>
-					<source src="30.mp3" type="audio/mpeg">
+					<source src="start.mp3" type="audio/mpeg">
 				</audio>
             </div>
         </div>
@@ -166,6 +166,8 @@
             if (!countdownInterval) {
                 startCountdown();
             }
+			audioPlayer.src = 'start.mp3';
+			audioPlayer.play();
         }
 		
 		function speakText(text) {
@@ -206,7 +208,7 @@
 						//speakText('还有30秒，还有30秒，还有30秒');
 					}
                 }
-            }, 500);
+            }, 1000);
         }
 
         function clearCountdown() {
